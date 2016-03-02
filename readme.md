@@ -46,3 +46,8 @@ Scanning address range 0x03-0x77
 60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 70: -- -- -- -- -- -- -- --
 ```
+
+## Tested on devices
+
+* [Arduino UNO R3 - ATmega328P](https://www.arduino.cc/en/Main/ArduinoBoardUno)
+* [WeMos D1 mini - ESP8266](http://www.wemos.cc/wiki/doku.php?id=en:d1_mini)

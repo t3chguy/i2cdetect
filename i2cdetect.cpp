@@ -11,7 +11,7 @@ i2cdetect.cpp - Arduino library for scanning I2C bus for devices
 #include "Wire.h"
 #include "i2cdetect.h"
 
-void i2cdetect(uint8_t first, uint8_t last) {
+void i2cdetect(Stream &output, uint8_t first, uint8_t last) {
   uint8_t i, address, error;
   char buff[10];
 
@@ -55,7 +55,14 @@ void i2cdetect(uint8_t first, uint8_t last) {
   Serial.println("\n");
 }
 
-void i2cdetect() {
-  i2cdetect(0x03, 0x77);  // default range
+void i2cdetect(uint8_t first, uint8_t last) {
+  i2cdetect(Serial, first, last);
 }
 
+void i2cdetect(Stream &output) {
+  i2cdetect(output, 0x03, 0x77); // default range
+}
+
+void i2cdetect() {
+  i2cdetect(Serial, 0x03, 0x77);  // default range
+}

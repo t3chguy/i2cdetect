@@ -16,43 +16,43 @@ void i2cdetect(Stream &output, uint8_t first, uint8_t last) {
   char buff[10];
 
   // table header
-  Serial.print("   ");
+  output.print("   ");
   for (i = 0; i < 16; i++) {
     //Serial.printf("%3x", i);
     sprintf(buff, "%3x", i);
-    Serial.print(buff);
+    output.print(buff);
   }
 
   // table body
   // addresses 0x00 through 0x77
   for (address = 0; address <= 119; address++) {
     if (address % 16 == 0) {
-      //Serial.printf("\n%#02x:", address & 0xF0);
+      //output.printf("\n%#02x:", address & 0xF0);
       sprintf(buff, "\n%02x:", address & 0xF0);
-      Serial.print(buff);
+      output.print(buff);
     }
     if (address >= first && address <= last) {
       Wire.beginTransmission(address);
       error = Wire.endTransmission();
       if (error == 0) {
         // device found
-        //Serial.printf(" %02x", address);
+        //output.printf(" %02x", address);
         sprintf(buff, " %02x", address);
-        Serial.print(buff);
+        output.print(buff);
       } else if (error == 4) {
         // other error
-        Serial.print(" XX");
+        output.print(" XX");
       } else {
         // error = 2: received NACK on transmit of address
         // error = 3: received NACK on transmit of data
-        Serial.print(" --");
+        output.print(" --");
       }
     } else {
       // address not scanned
-      Serial.print("   ");
+      output.print("   ");
     }
   }
-  Serial.println("\n");
+  output.println("\n");
 }
 
 void i2cdetect(uint8_t first, uint8_t last) {
